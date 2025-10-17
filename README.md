@@ -97,17 +97,17 @@ Backend
 cd backend
 npm install
 cp .env.example .env
-# Set environment variables:
-# MONGO_URI=your_mongo_uri
-# JWT_SECRET=your_jwt_secret
+Set environment variables:
+MONGO_URI=your_mongo_uri
+JWT_SECRET=your_jwt_secret
 npm start
 Frontend
 
 cd frontend
 npm install
 cp .env.example .env
-# Set environment variable:
-# REACT_APP_API_URL=http://localhost:5000/api
+Set environment variable:
+REACT_APP_API_URL=http://localhost:8000/api
 npm start
 
 Live Links
