@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+Flight Booking App
+Live Demo:
+* Backend: https://tentwenty-backend.onrender.com
+* Frontend: https://tentwenty-frontend-eta.vercel.app
+Tech Stack:
+* Frontend: React.js, Tailwind CSS, Lucide Icons
+* Backend: Node.js, Express.js
+* Database: MongoDB (Atlas)
+* Authentication: JWT
+* Hosting: Vercel (Frontend), Render (Backend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project Overview
+This is a full-stack flight booking application similar to popular flight booking platforms. Users can:
+* Search for flights based on origin, destination, date, airline, price, and sort options
+* View available flights with details (flight number, airline, departure/arrival time, price)
+* Book flights by selecting passengers and seats
+* See already booked seats as disabled/unavailable
+* View their My Bookings page with booking history
+* User authentication with login/logout functionality
 
-## Available Scripts
+Features Implemented
+Frontend
+* Responsive UI with Tailwind CSS
+* Flight search with filters (origin, destination, date, price range, airline)
+* Sorting options (Price, Departure, Duration)
+* Flight card displays:
+    * Flight number
+    * Airline
+    * Origin & destination
+    * Departure & arrival date & time
+    * Price per person
+* Booking modal:
+    * Add multiple passengers
+    * Seat selection (already booked seats disabled)
+    * Total price calculation
+* My Bookings page shows:
+    * Flight details
+    * Booked seats
+    * Total amount
+Backend
+* REST API using Node.js & Express
+* Authentication with JWT
+* Flight search API with filters & sorting
+* Booking API to save passenger and seat details
+* API to fetch already booked seats per flight
+* MongoDB for storing users, flights, bookings
 
-In the project directory, you can run:
+Project Structure
+Frontend
 
-### `npm start`
+src/
+  components/FlightCard.jsx
+  pages/BookingModal.jsx
+  pages/FlightSearch.jsx
+  pages/MyBookings.jsx
+  context/AuthContext.jsx
+  App.jsx
+Backend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+routes/
+  flights.js
+  bookings.js
+models/
+  Flight.js
+  Booking.js
+  User.js
+middleware/
+  auth.js
+server.js
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+How It Works
+1. User Registration/Login
+    * JWT token is generated on login
+    * Token stored in localStorage
+2. Flight Search
+    * Frontend sends search query to /api/flights/search
+    * Backend filters flights by origin, destination, date, price, airline
+    * Returns list of flights
+3. Booking a Flight
+    * User clicks Book on a flight card
+    * Modal opens with passenger form
+    * Seats that are already booked are disabled
+    * User adds passenger details and selects seat(s)
+    * Total price calculated automatically
+    * On confirm, booking is saved via POST /api/bookings
+4. My Bookings
+    * Fetch bookings via GET /api/bookings
+    * Displays flight info, seats booked, total amount
+5. Backend Seat Logic
+    * Booked seats are fetched from bookings collection
+    * Unique booked seats are disabled in the frontend
 
-### `npm test`
+How to Run Locally
+Backend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+cd backend
+npm install
+cp .env.example .env
+# Set environment variables:
+# MONGO_URI=your_mongo_uri
+# JWT_SECRET=your_jwt_secret
+npm start
+Frontend
 
-### `npm run build`
+cd frontend
+npm install
+cp .env.example .env
+# Set environment variable:
+# REACT_APP_API_URL=http://localhost:5000/api
+npm start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Live Links
+* Frontend: https://tentwenty-frontend-eta.vercel.app
+* Backend: https://tentwenty-backend.onrender.com
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Future Enhancements
+* Payment integration for bookings
+* Email/SMS notifications after booking
+* Dynamic seat map with real-time updates
+* Admin panel to manage flights
